@@ -5,3 +5,12 @@
 #12:00:01: 1 Red Light On 12:00:02: 1 Red Light Off 12:00:02: 2 Green Light On 12:00:03: 2 Green Light Off 12:00:03: 3 White Light On 12:00:04: 3 White Light Off etc. etc.
 #The sequence should continue in a loop until the program is interrupted.
 #Design the program so that it would be easy to modify the colours and the number of colours that make up the set of lights using object oriented techniques. (e.g. blue, red, yellow, white).
+import sys
+from lights import Lights
+
+if __name__ == "__main__":
+    Colours = ["Red","Green","White"]
+    LightSet = []
+    maxSet = int(sys.argv[1]) if len(sys.argv) > 1 else 20
+    for i in range(0, maxSet):
+        LightSet.append(Lights(Colours[i%3]))
