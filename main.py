@@ -25,3 +25,11 @@ if __name__ == "__main__":
     for i in range(0,maxSet):
         LightSet[i].toggleState()
         printLight(LightSet[i],i+1)
+
+    while True:
+        try:
+            string = input("Enter command: ")
+            if string == "exit":
+                break
+        except Exception as e:
+            print(e)
