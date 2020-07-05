@@ -7,6 +7,11 @@
 #Design the program so that it would be easy to modify the colours and the number of colours that make up the set of lights using object oriented techniques. (e.g. blue, red, yellow, white).
 import sys
 from lights import Lights
+from time import gmtime, strftime
+import time
+
+def printLight(light,pos):
+    print("{} {} {}".format(strftime("%H:%M:%S", gmtime()),pos,light))#
 
 if __name__ == "__main__":
     Colours = ["Red","Green","White"]
@@ -14,3 +19,9 @@ if __name__ == "__main__":
     maxSet = int(sys.argv[1]) if len(sys.argv) > 1 else 20
     for i in range(0, maxSet):
         LightSet.append(Lights(Colours[i%3]))
+        LightSet[i].toggleState()
+        printLight(LightSet[i],i+1)
+    time.sleep(1)
+    for i in range(0,maxSet):
+        LightSet[i].toggleState()
+        printLight(LightSet[i],i+1)

@@ -8,5 +8,8 @@ class Lights:
     
     def set_colour(self, colour):
         self._colour = colour
+    
+    def toggleState(self):
+        self._state = True if not self._state else False
 
     colour = property(set_colour)
