@@ -14,6 +14,9 @@ def printLight(light,pos):
     print("{} {} {}".format(strftime("%H:%M:%S", gmtime()),pos,light))#
 
 if __name__ == "__main__":
+    if not sys.argv[1].isdigit():
+        print("please enter a number or leave the argument blank")
+        exit() 
     Colours = ["Red","Green","White"]
     LightSet = []
     maxSet = int(sys.argv[1]) if len(sys.argv) > 1 else 20
@@ -25,7 +28,8 @@ if __name__ == "__main__":
     for i in range(0,maxSet):
         LightSet[i].toggleState()
         printLight(LightSet[i],i+1)
-
+    
+    index = 0
     while True:
         try:
             string = input("Enter command: ")
@@ -34,19 +38,22 @@ if __name__ == "__main__":
             elif string == "run":
                 try: 
                     while True: 
-                        for i in range(0, maxSet):
-                            LightSet[i].toggleState()
-                            printLight(LightSet[i],i+1)
-                            time.sleep(1)
-                            LightSet[i].toggleState()
-                            printLight(LightSet[i],i+1)
-                            time.sleep(1)
+                        LightSet[index].toggleState()
+                        printLight(LightSet[index],index+1)
+                        time.sleep(1)
+                        LightSet[index].toggleState()
+                        printLight(LightSet[index],index+1)
+                        time.sleep(1)
+                        index = 0 if index + 1 == maxSet else index + 1
                 except KeyboardInterrupt:
                     pass
             elif string.startswith("set "):
                 req = string[4:].strip()
-                reqList = req.split()   
-                if reqList[0].isdigit():
+                reqList = req.split() 
+                if len(reqList) != 2 or not reqList[0].isdigit() or not isinstance(reqList[1], str): 
+                    print("please enter a correct format")
+                    pass  
+                else:
                     LightSet[int(reqList[0]) - 1]._colour = reqList[1]
                     print("The light number {} is now {}".format(int(reqList[0]), reqList[1]))
         except Exception as e:
