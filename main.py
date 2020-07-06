@@ -43,5 +43,11 @@ if __name__ == "__main__":
                             time.sleep(1)
                 except KeyboardInterrupt:
                     pass
+            elif string.startswith("set "):
+                req = string[4:].strip()
+                reqList = req.split()   
+                if reqList[0].isdigit():
+                    LightSet[int(reqList[0]) - 1]._colour = reqList[1]
+                    print("The light number {} is now {}".format(int(reqList[0]), reqList[1]))
         except Exception as e:
             print(e)
