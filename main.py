@@ -31,5 +31,17 @@ if __name__ == "__main__":
             string = input("Enter command: ")
             if string == "exit":
                 break
+            elif string == "run":
+                try: 
+                    while True: 
+                        for i in range(0, maxSet):
+                            LightSet[i].toggleState()
+                            printLight(LightSet[i],i+1)
+                            time.sleep(1)
+                            LightSet[i].toggleState()
+                            printLight(LightSet[i],i+1)
+                            time.sleep(1)
+                except KeyboardInterrupt:
+                    pass
         except Exception as e:
             print(e)
